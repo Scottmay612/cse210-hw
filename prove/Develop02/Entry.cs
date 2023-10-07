@@ -10,6 +10,7 @@ public class Entry
 
     public static List<string> _prompts = new List<string>()
     {
+        // Store list of prompts that will be given to the user.
         "What is one thing I'm grateful for today?",
         "What is one thing that I learned today?",
         "Who did I meet today?",
@@ -19,64 +20,26 @@ public class Entry
     };
     public static int NumberGenerator()
     {
+        // Generate random number between 1 and 6.
         Random random = new Random();
         int randomNumber = random.Next(1, 6);
+
+        // Return random number.
         return randomNumber;
     }
     public static string PromptGenerator(List<string> prompts)
     {
+        // Use the random number to pick a random prompt from the list of promps.
         int randomNumber = NumberGenerator();
         string prompt = prompts[randomNumber];
+
+        // Return the prompt.
         return prompt;
     }
     public static void DisplayPrompt(string prompt)
     {
+        // Display the prompt to the user.
         Console.WriteLine(prompt);
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // public static string WriteNewEntry()
-    // {
-    //     // Journal journal1 = new Journal();
-    //     string prompt = PromptGenerator(_prompts);
-    //     DisplayPrompt(prompt);
-
-    //     Entry entry1 = new Entry();
-    //     entry1._date = DateTime.Now.ToString("yyyy-MM-dd");
-    //     entry1._response = Console.ReadLine();
-    //     entry1._question = prompt;
-
-    //     // Console.WriteLine("What is the name of the file? ");
-    //     // // Journal journal1 = new Journal();
-    //     // // journal1._filename = Console.ReadLine();
-    //     // string filename = Console.ReadLine();
-    //     // journal1._filename = filename;
-
-    //     // Append the new entry to the file.
-    //     // using (StreamWriter outputFile = new StreamWriter(journal1._filename, true))
-    //     // {
-    //     //     outputFile.WriteLine($"{entry1._date}~{entry1._question}~{entry1._response}");
-    //     // }
-    //     return journal1._filename;
-    // }
