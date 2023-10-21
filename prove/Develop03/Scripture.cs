@@ -67,11 +67,8 @@ class Scripture
     }
     public int GetWordCount()
     {
-        // Get the amount of how many items are remaining in the list.
-        int listSize = _wordCount.Count();
-
-        // Return listSize to be used in the Program Class.
-        return listSize;
+        // Return the word count to be used in the Program Class.
+        return _wordCount.Count();
     }
     public void Display()
     {
