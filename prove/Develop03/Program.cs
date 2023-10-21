@@ -23,7 +23,7 @@ class Program
 
         // Continue looping as long as the user doesn't type quit and there 
         // are words remaining in the scripture.
-        while (steps != "quit" && stepsRemaning >= 0)
+        while (steps != "quit" && stepsRemaning >= -2)
         {
             if (steps == "")
             {
@@ -32,7 +32,7 @@ class Program
                 Console.WriteLine();
 
                 // Reduce stepsRemaining by 1 every iteration.
-                stepsRemaning -= 1;
+                stepsRemaning -= 3;
 
                 // Display scripture reference.
                 reference1.DisplayReference();
@@ -40,7 +40,7 @@ class Program
                 // Display scripture text.
                 scripture1.Display();
 
-                // Blank out a new word in the words list.
+                // Blank out three new words in the words list.
                 scripture1.RandomString();
 
                 // Get user response.

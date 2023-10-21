@@ -42,18 +42,27 @@ class Scripture
         // Create new random number.
         Random randomNumber = new Random();
 
-        // Size is set to the length of the _wordCount list.
-        int size = _wordCount.Count;
+        // Create count variable to track iteration count.
+        int count = 0;
 
-        // A random index is picked in the length of the list.
-        int wordIndex = randomNumber.Next(size);
-
-        //Only run if size is greater than 0.
-        if (size != 0)
+        while (count <= 2 )
         {
-            // Replace the original word with underlines.
-            _words[_wordCount[wordIndex]] = new Word("____");
-            _wordCount.RemoveAt(wordIndex);
+            // Add one to count each iteration.
+            count += 1;
+
+            // Size is set to the length of the _wordCount list.
+            int size = _wordCount.Count;
+
+            // A random index is picked in the length of the list.
+            int wordIndex = randomNumber.Next(size);
+
+            //Only run if size is greater than 0.
+            if (size != 0)
+            {
+                // Replace the original word with underlines.
+                _words[_wordCount[wordIndex]] = new Word("____");
+                _wordCount.RemoveAt(wordIndex);
+            }
         }
     }
     public int GetWordCount()
