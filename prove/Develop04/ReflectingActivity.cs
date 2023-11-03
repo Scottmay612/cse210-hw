@@ -33,7 +33,7 @@ public class ReflectingActivity : Activity {
         int randomIndex = random.Next(_prompts.Count);
         return _prompts[randomIndex];
     }
-    public string RandomPrompt2Generator()
+    public string RandomQuestionGenerator()
     {
         Random random = new Random();
         int randomIndex = random.Next(_promptQuestions.Count);
@@ -48,7 +48,7 @@ public class ReflectingActivity : Activity {
 
         while (currentTime < futureTime)
         {
-            Console.Write($"> {RandomPrompt2Generator()} ");
+            Console.Write($"> {RandomQuestionGenerator()} ");
             DisplaySpinner(7);
             Console.WriteLine();
 

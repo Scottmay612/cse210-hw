@@ -31,48 +31,67 @@ public class Activity {
     }
     public void DisplayOpeningMsg()
     {
+        // Display opening message.
         Console.WriteLine(_OpeningMsg);
     }
     public void DisplayClosingMsg()
     {
+        // Display closing message.
         Console.WriteLine(_ClosingMsg);
     }
     public void DisplaySpinner(int time)
     {
+        // Display a spinner to prompt the user to wait.
+        // Parameter: Amount of seconds for the timer to go.
         int count = 0;
 
         while (count <= time)
         {
+            // Loop until the count limit exceeds the time.
+
             Console.Write("|");
             Thread.Sleep(300);
-            Console.Write("\b \b"); // Erase the + character
-            Console.Write("/"); // Replace it with the - character
+            Console.Write("\b \b"); // Erase the | character
+            Console.Write("/"); // Replace it with the / character
 
             Thread.Sleep(300);
-            Console.Write("\b \b"); // Erase the + character
+            Console.Write("\b \b"); // Erase the / character
             Console.Write("-"); // Replace it with the - character
 
             Thread.Sleep(300);
-            Console.Write("\b \b"); // Erase the + character
-            Console.Write("\\"); // Replace it with the - character
+            Console.Write("\b \b"); // Erase the - character
+            Console.Write("\\"); // Replace it with the \ character
 
             Thread.Sleep(300);
-            Console.Write("\b \b"); // Erase the + character
+            Console.Write("\b \b"); // Erase the \ character
             count += 1;
         }
     }
     public void DisplayCountdown(int time)
     {
+        // Displays countdown from a given time.
+        // Parameter: Number of seconds for countdown timer.
+
         while (time > 0)
         {
+            // Continue until the time exceeds the limit.
+
+            // Display number.
             Console.Write($"{time}");
+
+            // Wait for one second between each number.
             Thread.Sleep(1000);
-            Console.Write("\b \b"); // Erase the + character
+
+            // Erase the previous number.
+            Console.Write("\b \b"); 
+
+            // Decrement time by 1.
             time -= 1;
         }
     }
     public void UpdateClosingMsg()
     {
+        // Update the closing message in the constructor.
         _ClosingMsg = $"You have completed the {_ActivityName}! The activity lasted {_Duration} seconds.";
     }
 }
