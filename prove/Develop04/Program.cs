@@ -6,7 +6,7 @@ class Program
     // activity. At the end of the activity, the user is able to choose if they 
     // want to see what they wrote during the activity. If they say yes, it will 
     // display a numbered list of their responses. Then, they have to press 
-    //enter to continue.
+    // enter to continue.
     static void Main(string[] args)
     {
         // Continue until the user chooses quit.
