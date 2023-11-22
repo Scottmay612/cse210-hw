@@ -1,0 +1,4 @@
+140
+simple|Kiss natalya all the time|Kiss her on the mouth|100|True
+eternal|Hug natalya|Hug her all the time|40
+checklist|Scratch Natalya's back|do it|30|100|3|0
