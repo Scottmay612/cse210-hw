@@ -1,0 +1,4 @@
+game info|4|Skyjo|100
+player|Scott|45
+player|Brock|46
+player|Natalya's Bum|35

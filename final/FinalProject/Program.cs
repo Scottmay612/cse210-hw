@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Here are you options: ");
+        Console.WriteLine("Here are your options: ");
         Console.WriteLine("1. 5 Crowns");
         Console.WriteLine("2. Golf");
         Console.WriteLine("3. Skull King");
@@ -20,20 +20,33 @@ class Program
             case "1": {
                 // Begin 5 Crowns.
                 FiveCrowns fiveCrowns = new FiveCrowns();
-                fiveCrowns.RunGame();
+                fiveCrowns.SetInfo();
+                int endingLimit = fiveCrowns.GetEndingLimit();
+                fiveCrowns.RunGame(endingLimit);
                 break;
             }
             case "2": {
                 // Begin Golf.
+                Golf golf = new Golf();
+                golf.SetInfo();
+                int endingLimit = golf.GetEndingLimit();
+                golf.RunGame(endingLimit);
                 break;
             }
             case "3": {
                 // Begin Skull King.
+                SkullKing skullKing = new SkullKing();
+                skullKing.SetInfo();
+                int endingLimit = skullKing.GetEndingLimit();
+                skullKing.RunGame(endingLimit);
                 break;
             }
             case "4": {
                 // Begin Skyjo.
-
+                Skyjo skyjo = new Skyjo();
+                skyjo.SetInfo();
+                int endingLimit = skyjo.GetEndingLimit();
+                skyjo.RunGame(endingLimit);
                 break;
             }
             case "5": {
@@ -49,23 +62,59 @@ class Program
                 Console.WriteLine("What is the file name? ");
                 string fileName = Console.ReadLine();
                     string[] fileLines = System.IO.File.ReadAllLines(fileName);
-
-                    foreach (string line in fileLines)
+                    string gameInfo = fileLines[0];
+                    string[] splitGameInfo = gameInfo.Split("|");
+                    int roundNumber = int.Parse(splitGameInfo[1]);
+                    string gameName = splitGameInfo[2];
+                    int endingLimit = int.Parse(splitGameInfo[3]);
+                    Console.WriteLine(gameInfo);
+                    List<Player> playersList = new List<Player>();
+                    for (int i = 1; i < fileLines.Length; i++)
                     {
-                        // Split each parts at the | characters.
-                        string[] parts = line.Split("|");
-
-                        // Get the goal type of each goal.
-                        string playerName = parts[0];
+                        string[] parts = fileLines[i].Split("|");
+                        // string playerName = parts[1];
+                        // int playerScore = int.Parse(parts[2]); 
+                        Player player = new Player(parts);
+                        playersList.Add(player);
+                    }
+                    CreateGame(roundNumber, gameName, endingLimit, playersList);
                     }
                 
                 break;
-            }
+            // }
             case "8": {
                 // End the program.
                 break;
             }
         }
     
+    }
+    static void CreateGame( int roundNumber, string gameName, int endingLimit, List<Player> players) {
+        switch(gameName) {
+            case "5 Crowns": {
+                FiveCrowns fiveCrowns = new FiveCrowns(roundNumber, gameName, endingLimit, players);
+                fiveCrowns.RunGame(endingLimit);
+                break;
+            }
+            case "Golf": {
+                Golf golf = new Golf(roundNumber, gameName, endingLimit, players);
+                golf.RunGame(endingLimit);
+                break;
+            }
+            case "Skull King": {
+                SkullKing skullKing = new SkullKing(roundNumber, gameName, endingLimit, players);
+                skullKing.RunGame(endingLimit);
+                break;
+            }
+            case "Skyjo": {
+                Skyjo skyjo = new Skyjo(roundNumber, gameName, endingLimit, players);
+                skyjo.RunGame(endingLimit);
+                break;
+            }
+            case "Kanasta": {
+                Kanasta kanasta = new Kanasta(roundNumber, gameName, endingLimit, players);
+            }
+
+        }
     }
 }

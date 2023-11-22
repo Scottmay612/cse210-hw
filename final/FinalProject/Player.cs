@@ -6,12 +6,12 @@ public class Player {
         _name = name;
     }
     public Player(string[] strings) {
-        _name = strings[0];
-        _points = int.Parse(strings[1]);
+        _name = strings[1];
+        _points = int.Parse(strings[2]);
     }
     public override string ToString()
     {
-        string getPlayerInfo = $"{_name}|{_points}";
+        string getPlayerInfo = $"player|{_name}|{_points}";
         return getPlayerInfo;
     }
     public string GetName() {
