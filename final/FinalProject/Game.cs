@@ -53,6 +53,10 @@ public abstract class Game {
             player.SetScore(pointsGained);
         }
     }
+    public virtual void DisplayRoundMsg() {
+        // Display the round number.
+        Console.WriteLine($"Begin round {_roundNum} ");
+    }
     public virtual void RunGame(int roundLimit) {
     {
         // Declare the user's response for whether they would like to pause the game or continue playing.
@@ -63,7 +67,7 @@ public abstract class Game {
 
             // Display round number.
             Console.Clear();
-            Console.WriteLine($"Begin round {_roundNum} ");
+            DisplayRoundMsg();
             Console.WriteLine();
 
             // Get the round scores for each player.

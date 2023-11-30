@@ -1,12 +1,11 @@
-public class Skyjo : Game {
-    public Skyjo() {
-        _name = "Skyjo";
-        _description = "The card game Skyjo ends when a player has 100 or more points. Players add up their points, and the first player to flip over all their cards needs to have the lowest score. If they don't, or if it's tied, they have to double their score";
-        _endingLimit = 100;
+public class Canasta : Game {
+    public Canasta() {
+        _name = "Canasta";
+        _description = "Canasta is a card game where players meld cards to score points and race to reach 5,000 points or go out by getting rid of all their cards.";
         _roundNum = 1;
+        _endingLimit = 5000;
     }
-    private int _maximumScore = 0;
-    public Skyjo(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
+    public Canasta(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
     public override void RunGame(int limit)
     {
         // Declare the user's response for whether they would like to pause the game or continue playing.
@@ -64,7 +63,7 @@ public class Skyjo : Game {
             DisplayLeaderBoard();
         }    
     }
-    public int FindMaximumScore(List<Player> players, int maximumScore) {
+        public int FindMaximumScore(List<Player> players, int maximumScore) {
         foreach(Player player in players) {
             if (player.GetPoints() > maximumScore) {
                 maximumScore = player.GetPoints();

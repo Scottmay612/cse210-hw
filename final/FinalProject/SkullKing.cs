@@ -12,4 +12,9 @@ public class SkullKing : Game {
         List<Player> sortedList = _players.OrderByDescending(o=>o.GetPoints()).ToList();
         return sortedList;
     }
+    public override void DisplayRoundMsg()
+    {
+        base.DisplayRoundMsg();
+        Console.WriteLine($"This round, everyone will have {_roundNum} cards.");
+    }
 }

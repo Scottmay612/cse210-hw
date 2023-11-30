@@ -10,7 +10,7 @@ class Program
         Console.WriteLine("3. Skull King");
         Console.WriteLine("4. Skyjo");
         Console.WriteLine("5. Kanasta");
-        Console.WriteLine("6. Fruit Salad");
+        Console.WriteLine("6. Phase 10");
         Console.WriteLine("7. Load Previous Game");
         Console.WriteLine("8. Quit");
         Console.Write("Which game would you like to play? ");
@@ -50,16 +50,24 @@ class Program
                 break;
             }
             case "5": {
-                // Begin Kanasta
+                // Begin Canasta
+                Canasta canasta = new Canasta();
+                canasta.SetInfo();
+                int endingLimit = canasta.GetEndingLimit();
+                canasta.RunGame(endingLimit);
                 break;
             }
             case "6": {
-                // Begin Fruit Salad.
+                // Begin Phase 10.
+                PhaseTen phaseTen = new PhaseTen();
+                phaseTen.SetInfo();
+                int endingLimit = phaseTen.GetEndingLimit();
+                phaseTen.RunGame(endingLimit);
                 break;
             }
             case "7": {
                 // Load previous game.
-                Console.WriteLine("What is the file name? ");
+                Console.Write("What is the file name? ");
                 string fileName = Console.ReadLine();
                     string[] fileLines = System.IO.File.ReadAllLines(fileName);
                     string gameInfo = fileLines[0];
@@ -111,8 +119,15 @@ class Program
                 skyjo.RunGame(endingLimit);
                 break;
             }
-            case "Kanasta": {
-                Kanasta kanasta = new Kanasta(roundNumber, gameName, endingLimit, players);
+            case "Canasta": {
+                Canasta canasta = new Canasta(roundNumber, gameName, endingLimit, players);
+                canasta.RunGame(endingLimit);
+                break;
+            }
+            case "Phase 10": {
+                PhaseTen phaseTen = new PhaseTen(roundNumber, gameName, endingLimit, players);
+                phaseTen.RunGame(endingLimit);
+                break;
             }
 
         }
