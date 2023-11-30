@@ -63,12 +63,22 @@ public class Canasta : Game {
             DisplayLeaderBoard();
         }    
     }
-        public int FindMaximumScore(List<Player> players, int maximumScore) {
+    public int FindMaximumScore(List<Player> players, int maximumScore) {
         foreach(Player player in players) {
             if (player.GetPoints() > maximumScore) {
                 maximumScore = player.GetPoints();
             }
         }
         return maximumScore;
+    }
+    public override void SetPlayerNames(int playerAmount) {
+        _players = new List<Player>();
+        Console.WriteLine("What are their names?");
+        foreach(int num in Enumerable.Range(0,playerAmount)) {
+            Console.Write($"Player {num + 1}: ");
+            string playerName = Console.ReadLine();
+            Player player = new Player(playerName);
+            _players.Add(player);
+        }
     }
 }
