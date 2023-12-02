@@ -1,0 +1,3 @@
+game info|6|Cover Your Assets|1000000
+player|Natalya|900002
+player|Scott|900002

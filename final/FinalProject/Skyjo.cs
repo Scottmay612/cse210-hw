@@ -5,7 +5,6 @@ public class Skyjo : Game {
         _endingLimit = 100;
         _roundNum = 1;
     }
-    private int _maximumScore = 0;
     public Skyjo(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
     public override void RunGame(int limit)
     {

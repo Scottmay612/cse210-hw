@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-public abstract class Game {
+public class Game {
     protected string _name;
     protected List<string> _rules;
     protected List<Player> _players;
@@ -8,7 +8,10 @@ public abstract class Game {
     protected int _roundNum;
     protected string _description;
     protected int _endingLimit;
+
     public Game() {}
+    
+    // Create a constructor for when a game is loaded back in.
     public Game(int roundNum, string gameName, int endingLimit, List<Player> players) {
         _name = gameName;
         _roundNum = roundNum;
@@ -16,29 +19,30 @@ public abstract class Game {
         _endingLimit = endingLimit;
     }
     public int GetEndingLimit() {
+        // Return the game's ending limit.
         return _endingLimit;
     }
     public void SetInfo() {
         // Display the welcoming message and game description.
-        // DisplayWelcomeMsg();
         Console.WriteLine($"Welcome to {_name}!");
         Console.WriteLine(_description);
 
         // Get the amount of players and each of their names.
+        Console.Write("How many people are playing? ");
         _playerAmount = SetPlayerAmount();
+        
+        // Create a new list of Players.
+        _players = new List<Player>();
+
+        Console.WriteLine("What are their names?");
         SetPlayerNames(_playerAmount);
     }
-    
-    public void DisplayWelcomeMsg() {
-    }
     public int SetPlayerAmount() {
-        Console.Write("How many people are playing? ");
+        // Set the amount of players for the attribute _playerAmount.
         _playerAmount = int.Parse(Console.ReadLine());
         return _playerAmount;
     }
     public virtual void SetPlayerNames(int playerAmount) {
-        _players = new List<Player>();
-        Console.WriteLine("What are their names?");
         foreach(int num in Enumerable.Range(0,playerAmount)) {
             Console.Write($"Player {num + 1}: ");
             string playerName = Console.ReadLine();
@@ -108,6 +112,15 @@ public abstract class Game {
 
             // Display the scores.
             DisplayLeaderBoard();
+
+            Console.Write("Would you like to save your scores? (y/n) ");
+            string saveResponse = Console.ReadLine();
+
+            if (saveResponse == "y") {
+                Console.Write("What is the file name? ");
+                string gameFileFinished = Console.ReadLine();
+                SaveScores(gameFileFinished, GetScoreStrings(_players));
+            }
         }
     }    
 }
@@ -115,7 +128,7 @@ public abstract class Game {
         List<Player> sortedList = _players.OrderBy(o=>o.GetPoints()).ToList();
         return sortedList;
     }
-    public void DisplayLeaderBoard() {
+    public virtual void DisplayLeaderBoard() {
         int count = 1;
         List<Player> _rankedPlayers = OrderPlayers();
         foreach(Player player in _rankedPlayers) {

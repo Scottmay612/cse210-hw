@@ -1,11 +1,12 @@
-public class Canasta : Game {
-    public Canasta() {
-        _name = "Canasta";
-        _description = "Canasta is a card game where players meld cards to score points and race to reach 5,000 points or go out by getting rid of all their cards.";
+public class CoverYourAssets : Game {
+    public CoverYourAssets() {
+        _name = "Cover Your Assets";
+        _description = "Cover Your Assets is a fast-paced, easy-to-learn card game where players try to steal each other's assets to become the first millionaire.";
         _roundNum = 1;
-        _endingLimit = 5000;
+        _endingLimit = 1000000;
     }
-    public Canasta(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
+    // Create a constructor for when a game is loaded back in.
+    public CoverYourAssets(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
     public override void RunGame(int limit)
     {
         // Declare the user's response for whether they would like to pause the game or continue playing.
@@ -63,22 +64,59 @@ public class Canasta : Game {
             DisplayLeaderBoard();
         }    
     }
-    public int FindMaximumScore(List<Player> players, int maximumScore) {
-        foreach(Player player in players) {
-            if (player.GetPoints() > maximumScore) {
-                maximumScore = player.GetPoints();
-            }
+    // public int FindMaximumScore(List<Player> players, int maximumScore) {
+    //     foreach(Player player in players) {
+    //         if (player.GetPoints() > maximumScore) {
+    //             maximumScore = player.GetPoints();
+    //         }
+    //     }
+    //     return maximumScore;
+    // }
+public int FindMaximumScore(List<Player> players, int maximumScore)
+{
+    // Iterate through each player in the provided list.
+    foreach (Player player in players)
+    {
+        // Retrieve the current player's score.
+        int playerScore = player.GetPoints();
+
+        // Check if the current player's score is greater than the current maximum score.
+        if (playerScore > maximumScore)
+        {
+            // Update the maximum score to the current player's score.
+            maximumScore = playerScore;
         }
-        return maximumScore;
     }
-    public override void SetPlayerNames(int playerAmount) {
-        _players = new List<Player>();
-        Console.WriteLine("What are their names?");
-        foreach(int num in Enumerable.Range(0,playerAmount)) {
-            Console.Write($"Player {num + 1}: ");
-            string playerName = Console.ReadLine();
-            Player player = new Player(playerName);
-            _players.Add(player);
+
+    // Return the updated maximum score.
+    return maximumScore;
+}
+    public override void DisplayLeaderBoard() {        
+
+        // Declare the count as 1.
+        int count = 1;
+
+        // Create a list of players in the correct order.
+        List<Player> _rankedPlayers = OrderPlayers();
+
+        // Iterate through each player in the list.
+        foreach(Player player in _rankedPlayers) {
+
+            // Format the players points so that it has commas.
+            int playerPoints = player.GetPoints();
+            string formattedNumber = string.Format("{0:N0}", playerPoints);
+
+            // Display the name and score.
+            Console.WriteLine($"{count}. {player.GetName()}: {formattedNumber}");
+
+            // Increment count by 1.
+            count ++;
         }
+    }    public override List<Player> OrderPlayers()
+    {
+        // Order players from greatest to least. 
+        List<Player> sortedList = _players.OrderByDescending(o=>o.GetPoints()).ToList();
+
+        return sortedList;
     }
 }
