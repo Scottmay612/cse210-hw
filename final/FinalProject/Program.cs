@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Display menu options.
         Console.WriteLine("Here are your options: ");
         Console.WriteLine("1. 5 Crowns");
         Console.WriteLine("2. Golf");
@@ -77,58 +78,106 @@ class Program
                 break;
             }
         }
-    
     }
-    static void CreateGame( int roundNumber, string gameName, int endingLimit, List<Player> players) {
-        switch(gameName) {
-            case "5 Crowns": {
-                FiveCrowns fiveCrowns = new FiveCrowns(roundNumber, gameName, endingLimit, players);
-                fiveCrowns.RunGame(endingLimit);
-                break;
-            }
-            case "Golf": {
-                Golf golf = new Golf(roundNumber, gameName, endingLimit, players);
-                golf.RunGame(endingLimit);
-                break;
-            }
-            case "Skull King": {
-                SkullKing skullKing = new SkullKing(roundNumber, gameName, endingLimit, players);
-                skullKing.RunGame(endingLimit);
-                break;
-            }
-            case "Skyjo": {
-                Skyjo skyjo = new Skyjo(roundNumber, gameName, endingLimit, players);
-                skyjo.RunGame(endingLimit);
-                break;
-            }
-            case "Cover Your Assets": {
-                CoverYourAssets coverYourAssets = new CoverYourAssets(roundNumber, gameName, endingLimit, players);
-                coverYourAssets.RunGame(endingLimit);
-                break;
-            }
-            case "Phase 10": {
-                PhaseTen phaseTen = new PhaseTen(roundNumber, gameName, endingLimit, players);
-                phaseTen.RunGame(endingLimit);
-                break;
-            }
-        }
+static void CreateGame(int roundNumber, string gameName, int endingLimit, List<Player> players)
+{
+    // Switch based on the game name to create and run the corresponding game instance.
+    switch (gameName)
+    {
+        case "5 Crowns":
+            // Create a new instance of the FiveCrowns game.
+            FiveCrowns fiveCrowns = new FiveCrowns(roundNumber, gameName, endingLimit, players);
+
+            // Run the FiveCrowns game.
+            fiveCrowns.RunGame(endingLimit);
+
+            // Break out of the switch statement.
+            break;
+
+        case "Golf":
+            // Create a new instance of the Golf game.
+            Golf golf = new Golf(roundNumber, gameName, endingLimit, players);
+
+            // Run the Golf game.
+            golf.RunGame(endingLimit);
+
+            // Break out of the switch statement.
+            break;
+
+        case "Skull King":
+            // Create a new instance of the SkullKing game.
+            SkullKing skullKing = new SkullKing(roundNumber, gameName, endingLimit, players);
+
+            // Run the SkullKing game.
+            skullKing.RunGame(endingLimit);
+
+            // Break out of the switch statement.
+            break;
+
+        case "Skyjo":
+            // Create a new instance of the Skyjo game.
+            Skyjo skyjo = new Skyjo(roundNumber, gameName, endingLimit, players);
+
+            // Run the Skyjo game.
+            skyjo.RunGame(endingLimit);
+
+            // Break out of the switch statement.
+            break;
+
+        case "Cover Your Assets":
+            // Create a new instance of the CoverYourAssets game.
+            CoverYourAssets coverYourAssets = new CoverYourAssets(roundNumber, gameName, endingLimit, players);
+
+            // Run the CoverYourAssets game.
+            coverYourAssets.RunGame(endingLimit);
+
+            // Break out of the switch statement.
+            break;
+
+        case "Phase 10":
+            // Create a new instance of the PhaseTen game.
+            PhaseTen phaseTen = new PhaseTen(roundNumber, gameName, endingLimit, players);
+
+            // Run the PhaseTen game.
+            phaseTen.RunGame(endingLimit);
+
+            // Break out of the switch statement.
+            break;
     }
-    // static void LoadFile(string fileName) {
-    //     string[] fileLines = System.IO.File.ReadAllLines(fileName);
-    //     string gameInfo = fileLines[0];
-    //     string[] splitGameInfo = gameInfo.Split("|");
-    //     int roundNumber = int.Parse(splitGameInfo[1]);
-    //     string gameName = splitGameInfo[2];
-    //     int endingLimit = int.Parse(splitGameInfo[3]);
-    //     // Console.WriteLine(gameInfo);
-    //     List<Player> playersList = new List<Player>();
-    //     for (int i = 1; i < fileLines.Length; i++)
-    //     {
-    //         string[] parts = fileLines[i].Split("|");
-    //         Player player = new Player(parts);
-    //         playersList.Add(player);
+}
+    // static void CreateGame( int roundNumber, string gameName, int endingLimit, List<Player> players) {
+    //     switch(gameName) {
+    //         case "5 Crowns": {
+    //             FiveCrowns fiveCrowns = new FiveCrowns(roundNumber, gameName, endingLimit, players);
+    //             fiveCrowns.RunGame(endingLimit);
+    //             break;
+    //         }
+    //         case "Golf": {
+    //             Golf golf = new Golf(roundNumber, gameName, endingLimit, players);
+    //             golf.RunGame(endingLimit);
+    //             break;
+    //         }
+    //         case "Skull King": {
+    //             SkullKing skullKing = new SkullKing(roundNumber, gameName, endingLimit, players);
+    //             skullKing.RunGame(endingLimit);
+    //             break;
+    //         }
+    //         case "Skyjo": {
+    //             Skyjo skyjo = new Skyjo(roundNumber, gameName, endingLimit, players);
+    //             skyjo.RunGame(endingLimit);
+    //             break;
+    //         }
+    //         case "Cover Your Assets": {
+    //             CoverYourAssets coverYourAssets = new CoverYourAssets(roundNumber, gameName, endingLimit, players);
+    //             coverYourAssets.RunGame(endingLimit);
+    //             break;
+    //         }
+    //         case "Phase 10": {
+    //             PhaseTen phaseTen = new PhaseTen(roundNumber, gameName, endingLimit, players);
+    //             phaseTen.RunGame(endingLimit);
+    //             break;
+    //         }
     //     }
-    //     CreateGame(roundNumber, gameName, endingLimit, playersList);
     // }
     static void LoadFile(string fileName) {
         // Read all lines from the specified file.
