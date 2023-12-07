@@ -4,9 +4,28 @@ public class CoverYourAssets : Game {
         _description = "Cover Your Assets is a fast-paced, easy-to-learn card game where players try to steal each other's assets to become the first millionaire.";
         _roundNum = 1;
         _endingLimit = 1000000;
+        _gameRules = new List<string>() {
+            "Players: Cover Your Assets can be played with 2-6 players.",
+            "Deal cards: Each player gets 5 cards. Place the remaining deck in the center of the table.",
+            "Game play: Form a set by matching two cards together and setting them on your pile. Each new set of cards must be stacked opposite from the last to keep them separate.",
+            "Challenge: During a player's turn, they can challenge another player for a set. The two players take turn laying down the same card as what is in the set. If a player has no more of that card, they lose and the other person keeps the set.",
+            "Turn end: At the end of your turn, replenish your hand to 5 cards.",
+            "Round end: When the whole deck has been depleted, each player counts their sets to see how much money they earned. Then, the process is repeated over again.",
+            "Game end: The first player to become a millionaire wins the game!"
+        };
     }
     // Create a constructor for when a game is loaded back in.
-    public CoverYourAssets(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
+    public CoverYourAssets(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
+        _gameRules = new List<string>() {
+            "Players: Cover Your Assets can be played with 2-6 players.",
+            "Deal cards: Each player gets 5 cards. Place the remaining deck in the center of the table.",
+            "Game play: Form a set by matching two cards together and setting them on your pile. Each new set of cards must be stacked opposite from the last to keep them separate.",
+            "Challenge: During a player's turn, they can challenge another player for a set. The two players take turn laying down the same card as what is in the set. If a player has no more of that card, they lose and the other person keeps the set.",
+            "Turn end: At the end of your turn, replenish your hand to 5 cards.",
+            "Round end: When the whole deck has been depleted, each player counts their sets to see how much money they earned. Then, the process is repeated over again.",
+            "Game end: The first player to become a millionaire wins the game!"
+        };
+    }
     public override void RunGame(int limit)
     {
         // Declare the user's response for whether they would like to pause the game or continue playing.

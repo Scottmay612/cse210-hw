@@ -19,7 +19,7 @@ class Program
 
         switch(gameChoice) {
             case "1": {
-                // Begin 5 Crowns.
+                // Begin Five Crowns.
                 FiveCrowns fiveCrowns = new FiveCrowns();
                 fiveCrowns.SetInfo();
                 int endingLimit = fiveCrowns.GetEndingLimit();
@@ -84,7 +84,7 @@ static void CreateGame(int roundNumber, string gameName, int endingLimit, List<P
     // Switch based on the game name to create and run the corresponding game instance.
     switch (gameName)
     {
-        case "5 Crowns":
+        case "Five Crowns":
             // Create a new instance of the FiveCrowns game.
             FiveCrowns fiveCrowns = new FiveCrowns(roundNumber, gameName, endingLimit, players);
 
@@ -145,40 +145,7 @@ static void CreateGame(int roundNumber, string gameName, int endingLimit, List<P
             break;
     }
 }
-    // static void CreateGame( int roundNumber, string gameName, int endingLimit, List<Player> players) {
-    //     switch(gameName) {
-    //         case "5 Crowns": {
-    //             FiveCrowns fiveCrowns = new FiveCrowns(roundNumber, gameName, endingLimit, players);
-    //             fiveCrowns.RunGame(endingLimit);
-    //             break;
-    //         }
-    //         case "Golf": {
-    //             Golf golf = new Golf(roundNumber, gameName, endingLimit, players);
-    //             golf.RunGame(endingLimit);
-    //             break;
-    //         }
-    //         case "Skull King": {
-    //             SkullKing skullKing = new SkullKing(roundNumber, gameName, endingLimit, players);
-    //             skullKing.RunGame(endingLimit);
-    //             break;
-    //         }
-    //         case "Skyjo": {
-    //             Skyjo skyjo = new Skyjo(roundNumber, gameName, endingLimit, players);
-    //             skyjo.RunGame(endingLimit);
-    //             break;
-    //         }
-    //         case "Cover Your Assets": {
-    //             CoverYourAssets coverYourAssets = new CoverYourAssets(roundNumber, gameName, endingLimit, players);
-    //             coverYourAssets.RunGame(endingLimit);
-    //             break;
-    //         }
-    //         case "Phase 10": {
-    //             PhaseTen phaseTen = new PhaseTen(roundNumber, gameName, endingLimit, players);
-    //             phaseTen.RunGame(endingLimit);
-    //             break;
-    //         }
-    //     }
-    // }
+
     static void LoadFile(string fileName) {
         // Read all lines from the specified file.
         string[] fileLines = System.IO.File.ReadAllLines(fileName);

@@ -4,8 +4,29 @@ public class Skyjo : Game {
         _description = "The card game Skyjo ends when a player has 100 or more points. Players add up their points, and the first player to flip over all their cards needs to have the lowest score. If they don't, or if it's tied, they have to double their score";
         _endingLimit = 100;
         _roundNum = 1;
+        _gameRules = new List<string>() {
+            "Gather your players: Skyjo can be played with 2-8 players.",
+            "Prepare the cards: Each player receives 12 cards.",
+            "Shuffle the cards: Shuffle the cards thoroughly and deal them face down to each player. Players should not look at their cards yet.",
+            "Set up game: Each person lays their 12 cards facedown in a 3x4 grid.",
+            "Each round: Each player will take turns drawing a card from the deck. They can either swap it for one of their current cards or discard it and flip over one of their remaining cards. If they have three identical cards in a column, they remove that column from their grid!",
+            "Round end: The round ends when a player has turned over all of their remaining cards. That player needs to have the lowest score. If they don't, or if it's tied, they have to double their score.",
+            "Scoring: Each person adds up their remaining cards.",
+            "Game end: When a player has earned 100 points. The game is over. The player with the lowest points wins!"
+        };
     }
-    public Skyjo(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {}
+    public Skyjo(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
+        _gameRules = new List<string>() {
+            "Gather your players: Skyjo can be played with 2-8 players.",
+            "Prepare the cards: Each player receives 12 cards.",
+            "Shuffle the cards: Shuffle the cards thoroughly and deal them face down to each player. Players should not look at their cards yet.",
+            "Set up game: Each person lays their 12 cards facedown in a 3x4 grid.",
+            "Each round: Each player will take turns drawing a card from the deck. They can either swap it for one of their current cards or discard it and flip over one of their remaining cards. If they have three identical cards in a column, they remove that column from their grid!",
+            "Round end: The round ends when a player has turned over all of their remaining cards. That player needs to have the lowest score. If they don't, or if it's tied, they have to double their score.",
+            "Scoring: Each person adds up their remaining cards.",
+            "Game end: When a player has earned 100 points. The game is over. The player with the lowest points wins!"
+        };
+    }
     public override void RunGame(int limit)
     {
         // Declare the user's response for whether they would like to pause the game or continue playing.
