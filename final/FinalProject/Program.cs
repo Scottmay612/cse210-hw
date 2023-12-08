@@ -14,7 +14,7 @@ class Program
         Console.WriteLine("6. Phase 10");
         Console.WriteLine("7. Load Previous Game");
         Console.WriteLine("8. Quit");
-        Console.Write("Which game would you like to play? ");
+        Console.Write("What would you like to do? ");
         string gameChoice = Console.ReadLine();
 
         switch(gameChoice) {

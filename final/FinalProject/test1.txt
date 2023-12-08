@@ -1,3 +1,3 @@
-game info|3|Golf|9
-player|Scott|4
-player|May|6
+game info|6|Skyjo|100
+player|Scott|73
+player|Brock|94

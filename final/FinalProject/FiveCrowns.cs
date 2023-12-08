@@ -13,6 +13,12 @@ public class FiveCrowns : Game {
             "Scoring: At the end of each round, each player's remaining cards are added to their score.",
             "Game end: The game ends after the 13th round. The player with the least amount of points wins!",
         };
+        _suggestions = new List<string>() {
+            "Order your cards in ascending order at the beginning of each round to keep your hand clean and easy to see.",
+            "Pay attention to the round number! The wild card changes with each round and it is very easy to accidentally discard one.",
+            "When the round is drawing to a close, get rid of any high cards that you still have.",
+            "Pay attention to which cards the person after you is picking up. If you keep giving them the cards they want, they make go out quickly!"
+        };
     }
     public FiveCrowns(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
         _gameRules = new List<string>() {
@@ -24,25 +30,47 @@ public class FiveCrowns : Game {
             "Scoring: At the end of each round, each player's remaining cards are added to their score.",
             "Game end: The game ends after the 13th round. The player with the least amount of points wins!",
         };
+        _suggestions = new List<string>() {
+            "Order your cards in ascending order at the beginning of each round to keep your hand clean and easy to see.",
+            "Pay attention to the round number! The wild card changes with each round and it is very easy to accidentally discard one.",
+            "When the round is drawing to a close, get rid of any high cards that you still have.",
+            "Pay attention to which cards the person after you is picking up. If you keep giving them the cards they want, they make go out quickly!"
+        };
     }
     public void DisplayWildCard(){
+    // This function displays the wild card based on the current round number.
+
+        // Check the current round number.
         if (_roundNum <= 10) {
+
+            // For rounds 1-10, the round number is the wild card number.
             Console.WriteLine($"Wild Card: {_roundNum}");
         }
         else if (_roundNum == 11) {
+
+            // At round 11, the wild cards are jacks.
             Console.WriteLine($"Wild Card: Jack");
         }
         else if (_roundNum == 12) {
+
+            // At round 12, the wild cards are queens.
             Console.WriteLine($"Wild Card: Queen");
         }
         else if (_roundNum == 13) {
+
+            // At round 13, the wild cards are kings.
             Console.WriteLine($"Wild Card: King");
         }
     }
     public override void DisplayRoundMsg()
     {
+        // Display the normal round number. 
         base.DisplayRoundMsg();
+
+        // Tell how many cards everyone will have.
         Console.WriteLine($"This round, everyone will have {_roundNum} cards.");
+
+        // Tell which card is the wildcard.
         DisplayWildCard();
     }
 }

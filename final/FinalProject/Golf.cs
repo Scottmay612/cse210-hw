@@ -15,7 +15,14 @@ public class Golf : Game {
             "Scoring: At the end of each round, each player counts their points and adds it to their total score.",
             "Game end: After 9 rounds, the player with the least amount of points wins!"
         };
+        _suggestions = new List<string>() {
+            "Never replace your card with a drawn card unless you know what your card is. You could accidentally get rid of a good card!",
+            "If the person before you has a card that you need, hold onto your card for a while because they may need to get rid of theirs. That way, you can focus on other cards!",
+            "Be careful when replacing a higher card with a lower card. The goal is to get matches. Therefore, two 11's is no different than two 1's. Focus on getting matches first and then focus on keeping low cards towards the end of the round.",
+            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!"
+        };
     }
+    // Create a constructor for when the game is loaded back in.
     public Golf(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
         _gameRules = new List<string>() {
             "Players: Golf can be played with 2-6 players.",
@@ -27,6 +34,12 @@ public class Golf : Game {
             "Round end: When a player has flipped over their last card, the remaining players get one more turn and then the round is over.",
             "Scoring: At the end of each round, each player counts their points and adds it to their total score.",
             "Game end: After 9 rounds, the player with the least amount of points wins!"
+        };
+        _suggestions = new List<string>() {
+            "Never replace your card with a drawn card unless you know what your card is. You could accidentally get rid of a good card!",
+            "If the person before you has a card that you need, hold onto your card for a while because they may need to get rid of theirs. That way, you can focus on other cards!",
+            "Be careful when replacing a higher card with a lower card. The goal is to get matches. Therefore, two 11's is no different than two 1's. Focus on getting matches first and then focus on keeping low cards towards the end of the round.",
+            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!"
         };
     }
 }

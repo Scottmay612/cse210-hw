@@ -13,6 +13,13 @@ public class CoverYourAssets : Game {
             "Round end: When the whole deck has been depleted, each player counts their sets to see how much money they earned. Then, the process is repeated over again.",
             "Game end: The first player to become a millionaire wins the game!"
         };
+        _suggestions = new List<string>() {
+            "When creating your base, try to use the highest numbers you can because nobody can touch it.",
+            "Do not attempt to steal from another player unless you have plenty of cards to back yourself up.",
+            "Wait to steal until after everyone has already fought for the cards. Then, nobody has anything left to defend themselves with and you can take it for good!.",
+            "If you end up with a big pile, add as many layers on top of it as can!",
+            "Be patient and only make your moves when you have a high chance of success."
+        };
     }
     // Create a constructor for when a game is loaded back in.
     public CoverYourAssets(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
@@ -25,17 +32,25 @@ public class CoverYourAssets : Game {
             "Round end: When the whole deck has been depleted, each player counts their sets to see how much money they earned. Then, the process is repeated over again.",
             "Game end: The first player to become a millionaire wins the game!"
         };
+        _suggestions = new List<string>() {
+            "When creating your base, try to use the highest numbers you can because nobody can touch it.",
+            "Do not attempt to steal from another player unless you have plenty of cards to back yourself up.",
+            "Wait to steal until after everyone has already fought for the cards. Then, nobody has anything left to defend themselves with and you can take it for good!.",
+            "If you end up with a big pile, add as many layers on top of it as can!",
+            "Be patient and only make your moves when you have a high chance of success."
+        };
     }
     public override void RunGame(int limit)
     {
         // Declare the user's response for whether they would like to pause the game or continue playing.
         string continueResponse = "";
+        string menuChoice = "1";
 
         // Declare maximum score. This will change after every round of the game.
         int maximumScore = 0;
 
         // Continue looping while their are rounds remaining and the user has not typed save.
-        while(maximumScore <= limit && continueResponse != "save") {
+        while(maximumScore <= limit && menuChoice != "3" && menuChoice != "5") {
 
             // Display round number.
             Console.Clear();
@@ -51,24 +66,22 @@ public class CoverYourAssets : Game {
             Console.WriteLine("Here is the current leaderboard:");
             DisplayLeaderBoard();
 
-            // Give the user the option to either continue or pause the game and save their scores.
-            Console.Write("Press enter to continue or type 'save' to pause your game: ");
+            // Give the user the option to either continue or open the menu for more options.
+            Console.Write("Press enter to continue or type 'menu' for more options: ");
             continueResponse = Console.ReadLine();
 
             // Set the maximum score equal to the new highest score out of all of the players.
             maximumScore = FindMaximumScore(_players, maximumScore);
 
-            // Get the filename. Write the round number and the player's name/scores to the file.
-            if(continueResponse.ToLower() == "save") {
-                Console.Write("What is the file name? ");
-                string fileName = Console.ReadLine();
-                SaveScores(fileName, GetScoreStrings(_players));
+            // Run the in-game menu if they typed menu.
+            if(continueResponse.ToLower() == "menu") {
+                menuChoice = RunInGameMenu(menuChoice, limit);
             }
         }
         // Give different ending messages depending on whether the user finished the game or paused it.
         Console.WriteLine();
 
-        if(continueResponse == "save") {
+        if(menuChoice == "3") {
             // Display confirmation saved message.
             Console.WriteLine("Your progress is saved. Come again soon!");
         }
@@ -77,20 +90,26 @@ public class CoverYourAssets : Game {
             Console.WriteLine("The final leaderboard is...");
 
             // Pause for a moment for dramatic effect.
-            Thread.Sleep(1);
+            Thread.Sleep(1000);
 
             // Display the scores.
             DisplayLeaderBoard();
-        }    
+
+            // Ask if they would like to save their final scores.
+            Console.Write("Would you like to save your scores? (y/n) ");
+            string saveResponse = Console.ReadLine();
+
+            if (saveResponse == "y") {
+                // If they want to save their final scores, prompt for the file name.
+                Console.Write("What is the file name? ");
+                string gameFileFinished = Console.ReadLine();
+
+                // Save their scores to the file.
+                SaveScores(gameFileFinished, GetScoreStrings(_players));
+            }
+        }
     }
-    // public int FindMaximumScore(List<Player> players, int maximumScore) {
-    //     foreach(Player player in players) {
-    //         if (player.GetPoints() > maximumScore) {
-    //             maximumScore = player.GetPoints();
-    //         }
-    //     }
-    //     return maximumScore;
-    // }
+
 public int FindMaximumScore(List<Player> players, int maximumScore)
 {
     // Iterate through each player in the provided list.
@@ -110,7 +129,7 @@ public int FindMaximumScore(List<Player> players, int maximumScore)
     // Return the updated maximum score.
     return maximumScore;
 }
-    public override void DisplayLeaderBoard() {        
+    public override void DisplayLeaderBoard() {
 
         // Declare the count as 1.
         int count = 1;
@@ -131,7 +150,8 @@ public int FindMaximumScore(List<Player> players, int maximumScore)
             // Increment count by 1.
             count ++;
         }
-    }    public override List<Player> OrderPlayers()
+    }    
+    public override List<Player> OrderPlayers()
     {
         // Order players from greatest to least. 
         List<Player> sortedList = _players.OrderByDescending(o=>o.GetPoints()).ToList();

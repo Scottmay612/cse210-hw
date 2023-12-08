@@ -1,0 +1,3 @@
+game info|11|Phase 10|10
+player|Scott|10
+player|Natalya|7
