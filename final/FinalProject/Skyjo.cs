@@ -1,9 +1,13 @@
 public class Skyjo : Game {
+
+    // Constructor for when the game is initally created.
     public Skyjo() {
         _name = "Skyjo";
         _description = "The card game Skyjo ends when a player has 100 or more points. Players add up their points, and the first player to flip over all their cards needs to have the lowest score. If they don't, or if it's tied, they have to double their score";
         _endingLimit = 100;
         _roundNum = 1;
+
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Gather your players: Skyjo can be played with 2-8 players.",
             "Prepare the cards: Each player receives 12 cards.",
@@ -14,14 +18,21 @@ public class Skyjo : Game {
             "Scoring: Each person adds up their remaining cards.",
             "Game end: When a player has earned 100 points. The game is over. The player with the lowest points wins!"
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "Never replace your card with a drawn card unless you know what your card is. You could accidentally get rid of a good card!",
             "If the person before you has a card that you need, hold onto your card for a while because they may need to get rid of theirs. That way, you can focus on other cards!",
             "Be careful when replacing a higher card with a lower card. The goal is to get matches. Therefore, three 8's is no different than three 1's. Focus on getting matches first and then focus on keeping low cards towards the end of the round.",
-            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!"
+            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!",
+            "If you are going to go out, make sure you have the best score! If you don't, your score is doubled."
         };
     }
+
+    // Constructor for when the game is recreated and scores are loaded back in.
     public Skyjo(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
+        
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Gather your players: Skyjo can be played with 2-8 players.",
             "Prepare the cards: Each player receives 12 cards.",
@@ -32,11 +43,14 @@ public class Skyjo : Game {
             "Scoring: Each person adds up their remaining cards.",
             "Game end: When a player has earned 100 points. The game is over. The player with the lowest points wins!"
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "Never replace your card with a drawn card unless you know what your card is. You could accidentally get rid of a good card!",
             "If the person before you has a card that you need, hold onto your card for a while because they may need to get rid of theirs. That way, you can focus on other cards!",
             "Be careful when replacing a higher card with a lower card. The goal is to get matches. Therefore, three 8's is no different than three 1's. Focus on getting matches first and then focus on keeping low cards towards the end of the round.",
-            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!"
+            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!",
+            "If you are going to go out, make sure you have the best score! If you don't, your score is doubled."
         };
     }
     public override void RunGame(int limit)

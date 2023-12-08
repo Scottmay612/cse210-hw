@@ -10,7 +10,7 @@ public class Game {
     protected string _description;
     protected int _endingLimit;
 
-    // Create a constructor for 
+    // Create a constructor for when there are no required parameters.
     public Game() {}
 
     // Create a constructor for when a game is loaded back in.
@@ -135,7 +135,7 @@ public class Game {
             Console.WriteLine("Here is the current leaderboard:");
             DisplayLeaderBoard();
 
-            // Give the user the option to either continue or pause the game and save their scores.
+            // Give the user the option to either continue or open the menu for more options.
             Console.Write("Press enter to continue or type 'menu' for more options: ");
             continueResponse = Console.ReadLine();
 
@@ -163,92 +163,208 @@ public class Game {
             // Display the scores.
             DisplayLeaderBoard();
 
+            // Ask if they would like to save their final scores.
             Console.Write("Would you like to save your scores? (y/n) ");
             string saveResponse = Console.ReadLine();
 
             if (saveResponse == "y") {
+                // If they want to save their final scores, prompt for the file name.
                 Console.Write("What is the file name? ");
                 string gameFileFinished = Console.ReadLine();
+
+                // Save the scores to the file.
                 SaveScores(gameFileFinished, GetScoreStrings(_players));
             }
         }
     }
 
     public virtual List<Player> OrderPlayers() {
+        // Order the players from least points to highest points.
         List<Player> sortedList = _players.OrderBy(o=>o.GetPoints()).ToList();
+
+        // Return the sorted list.
         return sortedList;
     }
     public virtual void DisplayLeaderBoard() {
+        // Declare count to be displayed next to players names.
         int count = 1;
+
+        // Create ranked list of players.
         List<Player> _rankedPlayers = OrderPlayers();
+
         foreach(Player player in _rankedPlayers) {
+            // Display each players name and points amount.
             Console.WriteLine($"{count}. {player.GetName()}: {player.GetPoints()}");
+
+            // Briefly pause between players.
             Thread.Sleep(250);
+
+            // Increment the count by one.
             count ++;
         }
     }
     public List<string> GetScoreStrings(List<Player> players) {
+        // Create a list for the score information.
         List<string> scoreInfo = new List<string>();
+
+
         foreach(Player player in players) {
+            // Turn the player's information into a string.
             string playerInfo = player.ToString();
+
+            // Add the player information to the list.
             scoreInfo.Add(playerInfo);
         }
+
+        // Return the list of scores.
         return scoreInfo;
     }
-    public virtual string RunInGameMenu(string menuChoice, int roundLimit) {
+    // This function runs the in-game menu, allowing players to access options during the game.
+    public virtual string RunInGameMenu(string menuChoice, int roundLimit)
+    {
+        // Initially set menu choice to 1.
         menuChoice = "1";
-        while (menuChoice == "1" || menuChoice == "2") {
+
+        // Loop while the user chooses a valid option (1 or 2).
+        while (menuChoice == "1" || menuChoice == "2")
+        {
+            // Clear the console for a clean display.
             Console.Clear();
+
+            // Print the menu options.
             Console.WriteLine("Here are your menu options: ");
             Console.WriteLine("1. View Game Rules");
             Console.WriteLine("2. View Suggestions");
             Console.WriteLine("3. Save Game");
             Console.WriteLine("4. Return to Game");
             Console.WriteLine("5. Quit Game");
+
+            // Prompt the user for their choice.
             Console.Write("What would you like to do? ");
             menuChoice = Console.ReadLine();
-            switch (menuChoice) {
-                case "1": {
-                    Console.Clear();
-                    DisplayRules();
-                    Console.Write("Press enter to continue: ");
-                    Console.ReadLine();
-                    break;
-                }
-                case "2": {
-                    Console.Clear();
-                    DisplaySuggestions();
-                    Console.Write("Press enter to continue: ");
-                    Console.ReadLine();
-                    break;
-                }
-                case "3": {
-                    Console.Write("What is the file name? ");
-                    string fileName = Console.ReadLine();
-                    SaveScores(fileName, GetScoreStrings(_players));
-                    break;
-                }
-                case "4": {
-                    break;
-                }
-                case "5": {
-                    _roundNum = roundLimit + 1;
-                    break;
-                }
-                default: {
-                    Console.WriteLine("Please pick a valid option.");
-                    break;
-                }
+
+            // Switch statement to handle user input.
+            switch (menuChoice)
+            {
+                case "1": // View game rules
+                    {
+                        // Clear the console for the rules.
+                        Console.Clear();
+
+                        // Display the game rules.
+                        DisplayRules();
+
+                        // Wait for user input to continue.
+                        Console.Write("Press enter to continue: ");
+                        Console.ReadLine();
+                        break;
+                    }
+                case "2": // View suggestions
+                    {
+                        // Clear the console for the suggestions.
+                        Console.Clear();
+
+                        // Display suggestions for gameplay.
+                        DisplaySuggestions();
+
+                        // Wait for user input to continue.
+                        Console.Write("Press enter to continue: ");
+                        Console.ReadLine();
+                        break;
+                    }
+                case "3": // Save game
+                    {
+                        // Prompt the user for a filename to save the game scores.
+                        Console.Write("What is the file name? ");
+                        string fileName = Console.ReadLine();
+
+                        // Save the scores to the specified file.
+                        SaveScores(fileName, GetScoreStrings(_players));
+                        break;
+                    }
+                case "4": // Return to game
+                    {
+                        // Do nothing, continue the loop and return to the game.
+                        break;
+                    }
+                case "5": // Quit game
+                    {
+                        // Set the round number beyond the limit to effectively end the game.
+                        _roundNum = roundLimit + 1;
+                        break;
+                    }
+                default: // Invalid input
+                    {
+                        // Inform the user that their input was invalid.
+                        Console.WriteLine("Please pick a valid option.");
+                        break;
+                    }
             }
         }
-        return menuChoice;
-    }    
+    // Return the final chosen menu option.
+    return menuChoice;
+}
+    // public virtual string RunInGameMenu(string menuChoice, int roundLimit) {
+    //     menuChoice = "1";
+    //     while (menuChoice == "1" || menuChoice == "2") {
+    //         Console.Clear();
+    //         Console.WriteLine("Here are your menu options: ");
+    //         Console.WriteLine("1. View Game Rules");
+    //         Console.WriteLine("2. View Suggestions");
+    //         Console.WriteLine("3. Save Game");
+    //         Console.WriteLine("4. Return to Game");
+    //         Console.WriteLine("5. Quit Game");
+    //         Console.Write("What would you like to do? ");
+    //         menuChoice = Console.ReadLine();
+    //         switch (menuChoice) {
+    //             case "1": {
+    //                 Console.Clear();
+    //                 DisplayRules();
+    //                 Console.Write("Press enter to continue: ");
+    //                 Console.ReadLine();
+    //                 break;
+    //             }
+    //             case "2": {
+    //                 Console.Clear();
+    //                 DisplaySuggestions();
+    //                 Console.Write("Press enter to continue: ");
+    //                 Console.ReadLine();
+    //                 break;
+    //             }
+    //             case "3": {
+    //                 Console.Write("What is the file name? ");
+    //                 string fileName = Console.ReadLine();
+    //                 SaveScores(fileName, GetScoreStrings(_players));
+    //                 break;
+    //             }
+    //             case "4": {
+    //                 break;
+    //             }
+    //             case "5": {
+    //                 _roundNum = roundLimit + 1;
+    //                 break;
+    //             }
+    //             default: {
+    //                 Console.WriteLine("Please pick a valid option.");
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     return menuChoice;
+    // }    
     
     public void SaveScores(string fileName, List<string> scoreInfo) {
+    // Write the scores to a file.
 
         using(StreamWriter outputFile = new StreamWriter(fileName)) {
+
+            // Write the game information to the first line.
             outputFile.WriteLine($"game info|{_roundNum}|{_name}|{_endingLimit}");
+
+            // Iterate through each line of player information.
             foreach(string scoreLine in scoreInfo) {
+
+                // Write the line to the file.
                 outputFile.WriteLine(scoreLine);
             }
         }

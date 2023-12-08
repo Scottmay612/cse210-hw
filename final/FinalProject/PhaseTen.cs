@@ -2,11 +2,15 @@ using System.Reflection.Metadata.Ecma335;
 using System.Security.Principal;
 
 public class PhaseTen : Game {
+
+    // Constructor for when the game is initally created.
     public PhaseTen() {
         _name = "Phase 10";
         _description = "Phase 10 is a rummy-style card game where players race to complete ten unique phases, or sets of cards, to win.";
         _roundNum = 1;
         _endingLimit = 10;
+
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Players: Phase Ten can be played with 2-6 players.",
             "Each round: Each round has its own phase. Players will take turn drawing cards from the deck to try and create that phase. If they like that card, they must swap it for one of their current cards.",
@@ -14,6 +18,8 @@ public class PhaseTen : Game {
             "Round end: Once a player has played all of their cards, the round is over. Whoever has passed the phase can move on to the next one. If they did not pass, they must do the phase over again.",
             "Game end: The first person to finish the 10th phase wins. If two people are both on phase 10 together, the first person to get rid of all their cards is the winner."
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "Pay attention to the discard pile. Analyze the discarded cards to understand which cards are unavailable and adjust your strategy accordingly.",
             "Once you have laid your cards, try to finish the round as quickly as possible. If the other players have not gone out, they will be stuck on that phase for another round.",
@@ -21,15 +27,20 @@ public class PhaseTen : Game {
             "Utilize your wild cards strategically. There is often more than one way to use them."
         };
     }
-        // Create a constructor for when a game is loaded back in.
+    
+    // Create a constructor for when a game is loaded back in.
     public PhaseTen(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
-            _gameRules = new List<string>() {
+            
+        // Game rules for the in-game menu.
+        _gameRules = new List<string>() {
             "Players: Phase Ten can be played with 2-6 players.",
             "Each round: Each round has its own phase. Players will take turn drawing cards from the deck to try and create that phase. If they like that card, they must swap it for one of their current cards.",
             "Playing your cards: When players have all the correct cards, they can lay them down. Then they must continue playing until they have added all their remaining cards to any of the played cards on the table.",
             "Round end: Once a player has played all of their cards, the round is over. Whoever has passed the phase can move on to the next one. If they did not pass, they must do the phase over again.",
             "Game end: The first person to finish the 10th phase wins. If two people are both on phase 10 together, the first person to get rid of all their cards is the winner."
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "Pay attention to the discard pile. Analyze the discarded cards to understand which cards are unavailable and adjust your strategy accordingly.",
             "Once you have laid your cards, try to finish the round as quickly as possible. If the other players have not gone out, they will be stuck on that phase for another round.",
@@ -37,7 +48,7 @@ public class PhaseTen : Game {
             "Utilize your wild cards strategically. There is often more than one way to use them."
         };
     }
-    public List<string> _phases = new List<string>() {
+    private List<string> _phases = new List<string>() {
         // Store all of the phases for the game.
         "2 sets of 3",
         "1 set of 3 + 1 run of 4",
@@ -283,7 +294,10 @@ public class PhaseTen : Game {
     // }
     public override List<Player> OrderPlayers()
     {
+        // Order the players from greatest points to least points.
         List<Player> sortedList = _players.OrderByDescending(o=>o.GetPoints()).ToList();
+
+        // Return the ordered list.
         return sortedList;
     }
     public override void RunGame(int roundLimit) 

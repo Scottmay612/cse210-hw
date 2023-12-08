@@ -1,43 +1,6 @@
 
 public class SkullKing : Game {
-    public SkullKing() {
-        _name = "Skull King";
-        _description = "The game lasts ten rounds, and in each round, each player is dealt as many cards as the number of the round. Try to get as many points as you can!";
-        _roundNum = 1;
-        _endingLimit = 10;
-        _gameRules = new List<string>() {
-            "Gather your players: Skull King can be played with 2-6 players.",
-            "Deal cards equal to the round number (1 card in round 1, 2 cards in round 2, etc.)",
-            "Bid: Guess how many tricks you'll win like a true fortune teller.",
-            "Play cards, following suit if possible (except with special cards).",
-            "Highest card wins the trick! (Remember, highest numbered card of the suit led, not just any big number.)",
-            "Score points: Earn points for each trick you win according to your bid, plus bonus loot for capturing special cards.",
-            "Game end: After 10 rounds, the game is over. Total all points to find the winner! "
-        };
-        _suggestions = new List<string>() {
-            "Go for 0 tricks! You get 10 x the round number points if you do this. If it is possible, do it!",
-            "If you win a trick towards the end of the round, you will probably keep winning. Try to only win a trick if you are okay with winning the rest of them as well.",
-            "If you do not have the first color played, you can play either of the other two colors instead and it doesn't count for anything. Try to get rid of each color as quickly as you can.",
-            "If you have a pirate but do not want to win the trick. Wait until someone else plays one and then play yours. The first pirate played is the only one that counts."
-        };
-    }
-    public SkullKing(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
-        _gameRules = new List<string>() {
-            "Gather your players: Skull King can be played with 2-6 players.",
-            "Deal cards equal to the round number (1 card in round 1, 2 cards in round 2, etc.)",
-            "Bid: Guess how many tricks you'll win like a true fortune teller.",
-            "Play cards, following suit if possible (except with special cards).",
-            "Highest card wins the trick! (Remember, highest numbered card of the suit led, not just any big number.)",
-            "Score points: Earn points for each trick you win according to your bid, plus bonus loot for capturing special cards.",
-            "Game end: After 10 rounds, the game is over. Total all points to find the winner! "
-        };
-        _suggestions = new List<string>() {
-            "Go for 0 tricks! You get 10 x the round number points if you do this. If it is possible, do it!",
-            "If you win a trick towards the end of the round, you will probably keep winning. Try to only win a trick if you are okay with winning the rest of them as well.",
-            "If you do not have the first color played, you can play either of the other two colors instead and it doesn't count for anything. Try to get rid of each color as quickly as you can.",
-            "If you have a pirate but do not want to win the trick. Wait until someone else plays one and then play yours. The first pirate played is the only one that counts."
-        };
-    }
+    // List of special card values for the in-game menu.
     private List<string> _cardValues = new List<string>() {
         "Color cards: Colored cards are of least value. Each color has cards numbered 1-14. 14 is worth the most and 1 is worth the least.",
         "Escape: These five cards have a special purpose - avoiding victory. They lose to all other cards, making them valuable tools for ensuring you don't take more tricks than your bid.",
@@ -46,13 +9,64 @@ public class SkullKing : Game {
         "Skull King: The Skull King is the strongest card. He defeats almost all other cards. The only cards that can beat him are the mermaids.",
         "Mermaids: Mermaids can beat every other card except for the pirates. There are only two mermaids in the deck. If both are played in the same trick, then the first player to play one wins the trick whether they want to or not!"
     };
+    // Constructor for when the game is initally created.
+    public SkullKing() {
+        // Declare the game name, description, which round it starts on, and at what point it ends.
+        _name = "Skull King";
+        _description = "The game lasts ten rounds, and in each round, each player is dealt as many cards as the number of the round. Try to get as many points as you can!";
+        _roundNum = 1;
+        _endingLimit = 10;
+
+        // Game rules for the in-game menu.
+        _gameRules = new List<string>() {
+            "Gather your players: Skull King can be played with 2-6 players.",
+            "Deal cards equal to the round number (1 card in round 1, 2 cards in round 2, etc.)",
+            "Bid: Guess how many tricks you'll win like a true fortune teller.",
+            "Play cards, following suit if possible (except with special cards).",
+            "Highest card wins the trick! (Remember, highest numbered card of the suit led, not just any big number.)",
+            "Score points: Earn points for each trick you win according to your bid, plus bonus loot for capturing special cards.",
+            "Game end: After 10 rounds, the game is over. Total all points to find the winner! "
+        };
+
+        // Suggestions for the in-game menu.
+        _suggestions = new List<string>() {
+            "Go for 0 tricks! You get 10 x the round number points if you do this. If it is possible, do it!",
+            "If you win a trick towards the end of the round, you will probably keep winning. Try to only win a trick if you are okay with winning the rest of them as well.",
+            "If you do not have the first color played, you can play either of the other two colors instead and it doesn't count for anything. Try to get rid of each color as quickly as you can.",
+            "If you have a pirate but do not want to win the trick. Wait until someone else plays one and then play yours. The first pirate played is the only one that counts."
+        };
+    }
+    // Constructor for when the game is recreated and scores are loaded back in.
+    public SkullKing(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
+        // Game rules for the in-game menu.
+        _gameRules = new List<string>() {
+            "Gather your players: Skull King can be played with 2-6 players.",
+            "Deal cards equal to the round number (1 card in round 1, 2 cards in round 2, etc.)",
+            "Bid: Guess how many tricks you'll win like a true fortune teller.",
+            "Play cards, following suit if possible (except with special cards).",
+            "Highest card wins the trick! (Remember, highest numbered card of the suit led, not just any big number.)",
+            "Score points: Earn points for each trick you win according to your bid, plus bonus loot for capturing special cards.",
+            "Game end: After 10 rounds, the game is over. Total all points to find the winner! "
+        };
+
+        // Suggestions for the in-game menu.
+        _suggestions = new List<string>() {
+            "Go for 0 tricks! You get 10 x the round number points if you do this. If it is possible, do it!",
+            "If you win a trick towards the end of the round, you will probably keep winning. Try to only win a trick if you are okay with winning the rest of them as well.",
+            "If you do not have the first color played, you can play either of the other two colors instead and it doesn't count for anything. Try to get rid of each color as quickly as you can.",
+            "If you have a pirate but do not want to win the trick. Wait until someone else plays one and then play yours. The first pirate played is the only one that counts."
+        };
+    }
+
 
     public override List<Player> OrderPlayers()
     {
+        // Sort the players from greatest score to lowest score.
         List<Player> sortedList = _players.OrderByDescending(o=>o.GetPoints()).ToList();
+
+        // Return the sorted list.
         return sortedList;
     }
-    // This function displays the in-game menu
     public override string RunInGameMenu(string menuChoice, int roundLimit)
     {
         // Force menu choice to "1" initially.

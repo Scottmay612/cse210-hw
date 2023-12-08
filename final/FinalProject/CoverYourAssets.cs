@@ -1,9 +1,13 @@
 public class CoverYourAssets : Game {
+
+    // Constructor for when the game is initally created.
     public CoverYourAssets() {
         _name = "Cover Your Assets";
         _description = "Cover Your Assets is a fast-paced, easy-to-learn card game where players try to steal each other's assets to become the first millionaire.";
         _roundNum = 1;
         _endingLimit = 1000000;
+
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Players: Cover Your Assets can be played with 2-6 players.",
             "Deal cards: Each player gets 5 cards. Place the remaining deck in the center of the table.",
@@ -13,6 +17,8 @@ public class CoverYourAssets : Game {
             "Round end: When the whole deck has been depleted, each player counts their sets to see how much money they earned. Then, the process is repeated over again.",
             "Game end: The first player to become a millionaire wins the game!"
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "When creating your base, try to use the highest numbers you can because nobody can touch it.",
             "Do not attempt to steal from another player unless you have plenty of cards to back yourself up.",
@@ -23,6 +29,8 @@ public class CoverYourAssets : Game {
     }
     // Create a constructor for when a game is loaded back in.
     public CoverYourAssets(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
+        
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Players: Cover Your Assets can be played with 2-6 players.",
             "Deal cards: Each player gets 5 cards. Place the remaining deck in the center of the table.",
@@ -32,6 +40,8 @@ public class CoverYourAssets : Game {
             "Round end: When the whole deck has been depleted, each player counts their sets to see how much money they earned. Then, the process is repeated over again.",
             "Game end: The first player to become a millionaire wins the game!"
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "When creating your base, try to use the highest numbers you can because nobody can touch it.",
             "Do not attempt to steal from another player unless you have plenty of cards to back yourself up.",

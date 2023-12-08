@@ -1,9 +1,13 @@
 public class Golf : Game {
+    
+    // Constructor for when the game is initally created.
     public Golf() {
         _name = "Golf";
         _description = "This game is created after real life Golf. Therefore, the goal is to get the lowest amount of points possible.";
         _roundNum = 1;
         _endingLimit = 9;
+
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Players: Golf can be played with 2-6 players.",
             "Game setup: Each player is dealt 8 cards. They must lay them in 2 rows of 4 with all of the cards face down.",
@@ -15,15 +19,20 @@ public class Golf : Game {
             "Scoring: At the end of each round, each player counts their points and adds it to their total score.",
             "Game end: After 9 rounds, the player with the least amount of points wins!"
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "Never replace your card with a drawn card unless you know what your card is. You could accidentally get rid of a good card!",
             "If the person before you has a card that you need, hold onto your card for a while because they may need to get rid of theirs. That way, you can focus on other cards!",
             "Be careful when replacing a higher card with a lower card. The goal is to get matches. Therefore, two 11's is no different than two 1's. Focus on getting matches first and then focus on keeping low cards towards the end of the round.",
-            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!"
+            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!",
+            "At the beginning of each round, be a little daring and go for sets of 4 (-10). You have time and can accomplish your goal pretty often!."
         };
     }
     // Create a constructor for when the game is loaded back in.
     public Golf(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
+        
+        // Game rules for the in-game menu.
         _gameRules = new List<string>() {
             "Players: Golf can be played with 2-6 players.",
             "Game setup: Each player is dealt 8 cards. They must lay them in 2 rows of 4 with all of the cards face down.",
@@ -35,11 +44,14 @@ public class Golf : Game {
             "Scoring: At the end of each round, each player counts their points and adds it to their total score.",
             "Game end: After 9 rounds, the player with the least amount of points wins!"
         };
+
+        // Suggestions for the in-game menu.
         _suggestions = new List<string>() {
             "Never replace your card with a drawn card unless you know what your card is. You could accidentally get rid of a good card!",
             "If the person before you has a card that you need, hold onto your card for a while because they may need to get rid of theirs. That way, you can focus on other cards!",
             "Be careful when replacing a higher card with a lower card. The goal is to get matches. Therefore, two 11's is no different than two 1's. Focus on getting matches first and then focus on keeping low cards towards the end of the round.",
-            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!"
+            "Be mindful of the person after you. If you keep giving them the cards they need, they will go out before you are ready!",
+            "At the beginning of each round, be a little daring and go for sets of 4 (-10). You have time and can accomplish your goal pretty often!."
         };
     }
 }
