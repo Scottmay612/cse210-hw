@@ -9,6 +9,8 @@ public class Game {
     protected int _roundNum;
     protected string _description;
     protected int _endingLimit;
+    protected int _minimumPlayers;
+    protected int _maximumPlayers;
 
     // Create a constructor for when there are no required parameters.
     public Game() {}
@@ -34,7 +36,6 @@ public class Game {
 
         // Get the amount of players and each of their names.
         Console.WriteLine();
-        Console.Write("How many people are playing? ");
         SetPlayerAmount();
         
         // Create a new list of Players.
@@ -45,9 +46,30 @@ public class Game {
         SetPlayerNames(_playerAmount);
     }
     private int SetPlayerAmount() {
-        // Set the amount of players for the attribute _playerAmount.
+
+        // Declare the user's choice to continue even though they don't have a valid player amount.
+        string continueAnyway = "";
+
+        // Prompt for and set the amount of players for the attribute _playerAmount.
+        Console.Write("How many people are playing? ");
         _playerAmount = int.Parse(Console.ReadLine());
 
+        // Handle the case where they have the wrong amount of players.
+        while((_playerAmount < _minimumPlayers || _playerAmount > _maximumPlayers) && continueAnyway != "y") {
+
+            // Tell them they don't have the right amount of players and ask if they would like to continue anyway.
+            Console.WriteLine($"The recommended amount of players is {_minimumPlayers} - {_maximumPlayers}.");
+            Console.Write("Would you like to continue anyway? (y/n) ");
+            continueAnyway = Console.ReadLine();
+
+            // If they want to put in a new number, prompt for a new number.
+            if(continueAnyway.ToLower() == "n") {
+                Console.Write("How many players are there? ");
+                _playerAmount = int.Parse(Console.ReadLine());
+            }
+        }
+
+        // Return the amount of players.
         return _playerAmount;
     }
     private void SetPlayerNames(int playerAmount)
@@ -67,14 +89,6 @@ public class Game {
         }
     }
 
-    // private void SetPlayerNames(int playerAmount) {
-    //     foreach(int num in Enumerable.Range(0,playerAmount)) {
-    //         Console.Write($"Player {num + 1}: ");
-    //         string playerName = Console.ReadLine();
-    //         Player player = new Player(playerName);
-    //         _players.Add(player);
-    //     }
-    // }
     public virtual void GetScores() {
     // Get each players score for the round.
 
@@ -119,7 +133,7 @@ public class Game {
         string continueResponse = "";
         string menuChoice = "1";
 
-        // Continue looping while their are rounds remaining and the user has not typed save.
+        // Continue looping while their are rounds remaining and the user has not ended the game.
         while(_roundNum <= limit && menuChoice != "3" && menuChoice != "5") {
 
             // Display round number.
@@ -133,6 +147,7 @@ public class Game {
             // Display the current leaderboard.
             Console.WriteLine();
             Console.WriteLine("Here is the current leaderboard:");
+            Thread.Sleep(250);
             DisplayLeaderBoard();
 
             // Give the user the option to either continue or open the menu for more options.
@@ -193,14 +208,15 @@ public class Game {
         List<Player> _rankedPlayers = OrderPlayers();
 
         foreach(Player player in _rankedPlayers) {
+
             // Display each players name and points amount.
             Console.WriteLine($"{count}. {player.GetName()}: {player.GetPoints()}");
 
-            // Briefly pause between players.
-            Thread.Sleep(250);
-
             // Increment the count by one.
             count ++;
+
+            // Briefly pause between players.
+            Thread.Sleep(250);
         }
     }
     public List<string> GetScoreStrings(List<Player> players) {
@@ -246,7 +262,7 @@ public class Game {
             // Switch statement to handle user input.
             switch (menuChoice)
             {
-                case "1": // View game rules
+                case "1": // View game rules.
                     {
                         // Clear the console for the rules.
                         Console.Clear();
@@ -259,7 +275,7 @@ public class Game {
                         Console.ReadLine();
                         break;
                     }
-                case "2": // View suggestions
+                case "2": // View suggestions.
                     {
                         // Clear the console for the suggestions.
                         Console.Clear();
@@ -272,7 +288,7 @@ public class Game {
                         Console.ReadLine();
                         break;
                     }
-                case "3": // Save game
+                case "3": // Save game.
                     {
                         // Prompt the user for a filename to save the game scores.
                         Console.Write("What is the file name? ");
@@ -282,12 +298,12 @@ public class Game {
                         SaveScores(fileName, GetScoreStrings(_players));
                         break;
                     }
-                case "4": // Return to game
+                case "4": // Return to game.
                     {
                         // Do nothing, continue the loop and return to the game.
                         break;
                     }
-                case "5": // Quit game
+                case "5": // Quit game.
                     {
                         // Set the round number beyond the limit to effectively end the game.
                         _roundNum = roundLimit + 1;
@@ -304,55 +320,6 @@ public class Game {
     // Return the final chosen menu option.
     return menuChoice;
 }
-    // public virtual string RunInGameMenu(string menuChoice, int roundLimit) {
-    //     menuChoice = "1";
-    //     while (menuChoice == "1" || menuChoice == "2") {
-    //         Console.Clear();
-    //         Console.WriteLine("Here are your menu options: ");
-    //         Console.WriteLine("1. View Game Rules");
-    //         Console.WriteLine("2. View Suggestions");
-    //         Console.WriteLine("3. Save Game");
-    //         Console.WriteLine("4. Return to Game");
-    //         Console.WriteLine("5. Quit Game");
-    //         Console.Write("What would you like to do? ");
-    //         menuChoice = Console.ReadLine();
-    //         switch (menuChoice) {
-    //             case "1": {
-    //                 Console.Clear();
-    //                 DisplayRules();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "2": {
-    //                 Console.Clear();
-    //                 DisplaySuggestions();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "3": {
-    //                 Console.Write("What is the file name? ");
-    //                 string fileName = Console.ReadLine();
-    //                 SaveScores(fileName, GetScoreStrings(_players));
-    //                 break;
-    //             }
-    //             case "4": {
-    //                 break;
-    //             }
-    //             case "5": {
-    //                 _roundNum = roundLimit + 1;
-    //                 break;
-    //             }
-    //             default: {
-    //                 Console.WriteLine("Please pick a valid option.");
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     return menuChoice;
-    // }    
-    
     public void SaveScores(string fileName, List<string> scoreInfo) {
     // Write the scores to a file.
 

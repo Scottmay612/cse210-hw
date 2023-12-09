@@ -3,12 +3,16 @@ using System.Security.Principal;
 
 public class PhaseTen : Game {
 
+    // Declare the maximum score.
+    private int _maximumScore = 1;
     // Constructor for when the game is initally created.
     public PhaseTen() {
         _name = "Phase 10";
         _description = "Phase 10 is a rummy-style card game where players race to complete ten unique phases, or sets of cards, to win.";
         _roundNum = 1;
         _endingLimit = 10;
+        _minimumPlayers = 2;
+        _maximumPlayers = 6;
 
         // Game rules for the in-game menu.
         _gameRules = new List<string>() {
@@ -27,7 +31,7 @@ public class PhaseTen : Game {
             "Utilize your wild cards strategically. There is often more than one way to use them."
         };
     }
-    
+
     // Create a constructor for when a game is loaded back in.
     public PhaseTen(int roundNum, string gameName, int roundLimit, List<Player> players) : base(roundNum,gameName,roundLimit,players) {
             
@@ -61,18 +65,13 @@ public class PhaseTen : Game {
         "1 set of 5 + 1 set of 2",
         "1 set of 5 + 1 set of 3"
     };
-    public override void DisplayRoundMsg()
-    {
-        // Display the rules for each phase (round).
-        Console.WriteLine($"Begin Phase {_roundNum}: {_phases[_roundNum - 1]}");
-    }
     public void DisplayPhases() {
         // Display header.
         Console.WriteLine("Phases:");
 
         // Number and display each phase.
         for(int i = 1; i <= 10; i ++) {
-            Console.WriteLine($"- Phase{i}: {_phases[i - 1]}");
+            Console.WriteLine($"- Phase {i}: {_phases[i - 1]}");
         }
     }
     public override void DisplayLeaderBoard()
@@ -151,7 +150,7 @@ public class PhaseTen : Game {
             Console.WriteLine("Here are your menu options: ");
             Console.WriteLine("1. View Game Rules");
             Console.WriteLine("2. View Suggestions");
-            Console.WriteLine("3. View Card Values");
+            Console.WriteLine("3. View Phases");
             Console.WriteLine("4. Save Game");
             Console.WriteLine("5. Return to Game");
             Console.WriteLine("6. Quit Game");
@@ -169,7 +168,6 @@ public class PhaseTen : Game {
                         Console.Clear();
 
                         // Display the game rules.
-                        Console.WriteLine($"{_name} rules: ");
                         DisplayRules();
 
                         // Wait for user input to continue.
@@ -234,64 +232,11 @@ public class PhaseTen : Game {
         // Return the user's final choice
         return menuChoice;
     }
-
-    // public override string RunInGameMenu(string menuChoice, int roundLimit) {
-    //     menuChoice = "1";
-    //     while (menuChoice == "1" || menuChoice == "2" || menuChoice == "3") {
-    //         Console.Clear();
-    //         Console.WriteLine("Here are your menu options: ");
-    //         Console.WriteLine("1. View Game Rules");
-    //         Console.WriteLine("2. View Suggestions");
-    //         Console.WriteLine("3. See All Phases");
-    //         Console.WriteLine("4. Save Game");
-    //         Console.WriteLine("5. Return to Game");
-    //         Console.WriteLine("6. Quit Game");
-    //         Console.Write("What would you like to do? ");
-    //         menuChoice = Console.ReadLine();
-    //         switch (menuChoice) {
-    //             case "1": {
-    //                 Console.Clear();
-    //                 Console.WriteLine($"{_name} rules: ");
-    //                 DisplayRules();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "2": {
-    //                 Console.Clear();
-    //                 DisplaySuggestions();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "3": {
-    //                 Console.Clear();
-    //                 DisplayPhases();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "4": {
-    //                 Console.Write("What is the file name? ");
-    //                 string fileName = Console.ReadLine();
-    //                 SaveScores(fileName, GetScoreStrings(_players));
-    //                 break;
-    //             }
-    //             case "5": {
-    //                 break;
-    //             }
-    //             case "6": {
-    //                 _roundNum = roundLimit + 1;
-    //                 break;
-    //             }
-    //             default: {
-    //                 Console.WriteLine("Please pick a valid option.");
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     return menuChoice;
-    // }
+    public override void DisplayRoundMsg()
+    {
+        base.DisplayRoundMsg();
+        Console.WriteLine($"The leading Phase is Phase {_maximumScore}: {_phases[_maximumScore - 1]}");
+    }
     public override List<Player> OrderPlayers()
     {
         // Order the players from greatest points to least points.
@@ -302,15 +247,20 @@ public class PhaseTen : Game {
     }
     public override void RunGame(int roundLimit) 
     {
-        // Declare the user's response for whether they would like to pause the game or continue playing.
+        // Declare the user's response for whether they would like to see the menu or continue playing.
         string continueResponse = "";
         string menuChoice = "1";
 
-        // Continue looping while their are rounds remaining and the user has not typed save.
-        while(_roundNum <= roundLimit && menuChoice != "4" && menuChoice != "6") {
+        // Set the maximum score equal to highest score out of all of the players.
+        _maximumScore = FindMaximumScore(_players);
+
+        // Continue looping while their are rounds remaining and the user has not ended the game.
+        while(_maximumScore <= roundLimit && menuChoice != "4" && menuChoice != "6") {
 
             // Display round number.
             Console.Clear();
+
+            // Display the rules for each phase (round).
             DisplayRoundMsg();
             Console.WriteLine();
 
@@ -320,11 +270,15 @@ public class PhaseTen : Game {
             // Display the current leaderboard.
             Console.WriteLine();
             Console.WriteLine("Here is the current leaderboard:");
+            Thread.Sleep(250);
             DisplayLeaderBoard();
 
             // Give the user the option to either continue or open the menu for more options.
             Console.Write("Press enter to continue or type 'menu' for more options: ");
             continueResponse = Console.ReadLine();
+
+            // Set the maximum score equal to the new highest score out of all of the players.
+            _maximumScore = FindMaximumScore(_players);
 
             // Increment the round number by one prior to saving the file.
             _roundNum ++;
@@ -365,5 +319,19 @@ public class PhaseTen : Game {
                 SaveScores(gameFileFinished, GetScoreStrings(_players));
             }
         }
+    }
+    public int FindMaximumScore(List<Player> players) {
+    // Return the highest score out of all the players. 
+
+        // Iterate through each player.
+        foreach(Player player in players) {
+
+            // If they have the new highest score, set maximum score to their score.
+            if (player.GetPoints() > _maximumScore) {
+                _maximumScore = player.GetPoints();
+            }
+        }
+        // Return the maximum score.
+        return _maximumScore;
     }
 }

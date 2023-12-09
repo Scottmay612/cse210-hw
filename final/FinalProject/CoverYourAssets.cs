@@ -6,6 +6,8 @@ public class CoverYourAssets : Game {
         _description = "Cover Your Assets is a fast-paced, easy-to-learn card game where players try to steal each other's assets to become the first millionaire.";
         _roundNum = 1;
         _endingLimit = 1000000;
+        _minimumPlayers = 2;
+        _maximumPlayers = 6;
 
         // Game rules for the in-game menu.
         _gameRules = new List<string>() {
@@ -22,7 +24,7 @@ public class CoverYourAssets : Game {
         _suggestions = new List<string>() {
             "When creating your base, try to use the highest numbers you can because nobody can touch it.",
             "Do not attempt to steal from another player unless you have plenty of cards to back yourself up.",
-            "Wait to steal until after everyone has already fought for the cards. Then, nobody has anything left to defend themselves with and you can take it for good!.",
+            "Wait to steal until after everyone has already fought for the cards. Then, nobody has anything left to defend themselves with and you can take it for good!",
             "If you end up with a big pile, add as many layers on top of it as can!",
             "Be patient and only make your moves when you have a high chance of success."
         };
@@ -45,7 +47,7 @@ public class CoverYourAssets : Game {
         _suggestions = new List<string>() {
             "When creating your base, try to use the highest numbers you can because nobody can touch it.",
             "Do not attempt to steal from another player unless you have plenty of cards to back yourself up.",
-            "Wait to steal until after everyone has already fought for the cards. Then, nobody has anything left to defend themselves with and you can take it for good!.",
+            "Wait to steal until after everyone has already fought for the cards. Then, nobody has anything left to defend themselves with and you can take it for good!",
             "If you end up with a big pile, add as many layers on top of it as can!",
             "Be patient and only make your moves when you have a high chance of success."
         };
@@ -59,8 +61,8 @@ public class CoverYourAssets : Game {
         // Declare maximum score. This will change after every round of the game.
         int maximumScore = 0;
 
-        // Continue looping while their are rounds remaining and the user has not typed save.
-        while(maximumScore <= limit && menuChoice != "3" && menuChoice != "5") {
+        // Continue looping while their are rounds remaining and the user has not ended the game.
+        while(maximumScore < limit && menuChoice != "3" && menuChoice != "5") {
 
             // Display round number.
             Console.Clear();
@@ -74,6 +76,7 @@ public class CoverYourAssets : Game {
             // Display the current leaderboard.
             Console.WriteLine();
             Console.WriteLine("Here is the current leaderboard:");
+            Thread.Sleep(250);
             DisplayLeaderBoard();
 
             // Give the user the option to either continue or open the menu for more options.
@@ -149,7 +152,7 @@ public int FindMaximumScore(List<Player> players, int maximumScore)
 
         // Iterate through each player in the list.
         foreach(Player player in _rankedPlayers) {
-
+            
             // Format the players points so that it has commas.
             int playerPoints = player.GetPoints();
             string formattedNumber = string.Format("{0:N0}", playerPoints);
@@ -159,6 +162,9 @@ public int FindMaximumScore(List<Player> players, int maximumScore)
 
             // Increment count by 1.
             count ++;
+
+            // Pause briefly between players.
+            Thread.Sleep(250);
         }
     }    
     public override List<Player> OrderPlayers()

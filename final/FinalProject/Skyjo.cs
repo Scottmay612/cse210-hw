@@ -6,6 +6,8 @@ public class Skyjo : Game {
         _description = "The card game Skyjo ends when a player has 100 or more points. Players add up their points, and the first player to flip over all their cards needs to have the lowest score. If they don't, or if it's tied, they have to double their score";
         _endingLimit = 100;
         _roundNum = 1;
+        _minimumPlayers = 2;
+        _maximumPlayers = 8;
 
         // Game rules for the in-game menu.
         _gameRules = new List<string>() {
@@ -62,8 +64,8 @@ public class Skyjo : Game {
         // Declare maximum score. This will change after every round of the game.
         int maximumScore = 0;
 
-        // Continue looping while their are rounds remaining and the user has not typed save.
-        while(maximumScore <= limit && menuChoice != "3" && menuChoice != "5") {
+        // Continue looping while their are rounds remaining and the user has not ended the game.
+        while(maximumScore < limit && menuChoice != "3" && menuChoice != "5") {
 
             // Display round number.
             Console.Clear();
@@ -77,6 +79,7 @@ public class Skyjo : Game {
             // Display the current leaderboard.
             Console.WriteLine();
             Console.WriteLine("Here is the current leaderboard:");
+            Thread.Sleep(250);
             DisplayLeaderBoard();
 
             // Give the user the option to either continue or pause the game and save their scores.

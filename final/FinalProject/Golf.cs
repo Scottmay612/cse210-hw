@@ -6,6 +6,8 @@ public class Golf : Game {
         _description = "This game is created after real life Golf. Therefore, the goal is to get the lowest amount of points possible.";
         _roundNum = 1;
         _endingLimit = 9;
+        _minimumPlayers = 2;
+        _maximumPlayers = 6;
 
         // Game rules for the in-game menu.
         _gameRules = new List<string>() {

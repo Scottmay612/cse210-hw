@@ -1,3 +1,0 @@
-game info|10|Golf|9
-player|Scott|110
-player|Natalya|100

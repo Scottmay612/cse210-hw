@@ -1,3 +1,0 @@
-game info|6|Skyjo|100
-player|Scott|73
-player|Brock|94

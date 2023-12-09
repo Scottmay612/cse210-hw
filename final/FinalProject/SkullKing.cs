@@ -16,6 +16,8 @@ public class SkullKing : Game {
         _description = "The game lasts ten rounds, and in each round, each player is dealt as many cards as the number of the round. Try to get as many points as you can!";
         _roundNum = 1;
         _endingLimit = 10;
+        _minimumPlayers = 2;
+        _maximumPlayers = 8;
 
         // Game rules for the in-game menu.
         _gameRules = new List<string>() {
@@ -57,8 +59,6 @@ public class SkullKing : Game {
             "If you have a pirate but do not want to win the trick. Wait until someone else plays one and then play yours. The first pirate played is the only one that counts."
         };
     }
-
-
     public override List<Player> OrderPlayers()
     {
         // Sort the players from greatest score to lowest score.
@@ -100,7 +100,6 @@ public class SkullKing : Game {
                         Console.Clear();
 
                         // Display the game rules.
-                        Console.WriteLine($"{_name} rules: ");
                         DisplayRules();
 
                         // Wait for user input to continue.
@@ -166,66 +165,6 @@ public class SkullKing : Game {
         // Return the user's final choice
         return menuChoice;
     }
-
-    // public override string ShowInGameMenu(string menuChoice, int roundLimit)
-    // {
-    //     menuChoice = "1";
-    //     while (menuChoice == "1" || menuChoice == "2" || menuChoice == "3") {
-    //         Console.Clear();
-    //         Console.WriteLine("Here are your menu options: ");
-    //         Console.WriteLine("1. View Game Rules");
-    //         Console.WriteLine("2. View Suggestions");
-    //         Console.WriteLine("3. View Card Values");
-    //         Console.WriteLine("4. Save Game");
-    //         Console.WriteLine("5. Return to Game");
-    //         Console.WriteLine("6. Quit Game");
-    //         Console.Write("What would you like to do? ");
-    //         menuChoice = Console.ReadLine();
-    //         switch (menuChoice) {
-    //             case "1": {
-    //                 Console.Clear();
-    //                 Console.WriteLine($"{_name} rules: ");
-    //                 DisplayRules();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "2": {
-    //                 Console.Clear();
-    //                 DisplaySuggestions();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "3": {
-    //                 Console.Clear();
-    //                 Console.WriteLine("Card values: ");
-    //                 DisplayCardValues();
-    //                 Console.Write("Press enter to continue: ");
-    //                 Console.ReadLine();
-    //                 break;
-    //             }
-    //             case "4": {
-    //                 Console.Write("What is the file name? ");
-    //                 string fileName = Console.ReadLine();
-    //                 SaveScores(fileName, GetScoreStrings(_players));
-    //                 break;
-    //             }
-    //             case "5": {
-    //                 break;
-    //             }
-    //             case "6": {
-    //                 _roundNum = roundLimit + 1;
-    //                 break;
-    //             }
-    //             default: {
-    //                 Console.WriteLine("Please enter a valid menu response.");
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     return menuChoice;
-    // }
     public override void DisplayRoundMsg()
     {
         // Override DisplayRoundMsg so that it tells how many cards everyone will have.
@@ -238,7 +177,7 @@ public class SkullKing : Game {
         string continueResponse = "";
         string menuChoice = "1";
 
-        // Continue looping while their are rounds remaining and the user has not typed save.
+        // Continue looping while their are rounds remaining and the user has not ended the game.
         while(_roundNum <= roundLimit && menuChoice != "4" && menuChoice != "6") {
 
             // Display round number.
@@ -252,6 +191,7 @@ public class SkullKing : Game {
             // Display the current leaderboard.
             Console.WriteLine();
             Console.WriteLine("Here is the current leaderboard:");
+            Thread.Sleep(250);
             DisplayLeaderBoard();
 
             // Give the user the option to either continue or open the game menu for more options.

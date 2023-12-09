@@ -6,6 +6,8 @@ public class FiveCrowns : Game {
         _description = "For this game, you want to end with the least amount of points as possible. Each round, you will try to discard all of your cards by putting them in melds (runs or books). Each round ends after the first person lays down all of their cards. Any cards remaining will be counted as your score.";
         _roundNum = 3;
         _endingLimit = 13;
+        _minimumPlayers = 2;
+        _maximumPlayers = 7;
 
         // Game rules for the in-game menu.
         _gameRules = new List<string>() {
